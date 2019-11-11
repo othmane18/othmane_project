@@ -18,28 +18,28 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if ($guard == "admin" && Auth::guard($guard)->check()) {
-            return redirect('/admin');
+            return redirect('/admins');
         }
         if ($guard == "enseignant" && Auth::guard($guard)->check()) {
-            return redirect('/enseignant');
+            return redirect('/enseignants');
         }
         if ($guard == "etudiant" && Auth::guard($guard)->check()) {
-            return redirect('/etudiant');
+            return redirect('/etudiants');
         }
         if ($guard == "directeur_reg" && Auth::guard($guard)->check()) {
-            return redirect('/directeur_reg');
+            return redirect('/directeur_regs');
         }
         if ($guard == "directeur_prov" && Auth::guard($guard)->check()) {
-            return redirect('/directeur_prov');
+            return redirect('/directeur_provs');
         }
         if ($guard == "inspecteur_reg" && Auth::guard($guard)->check()) {
-            return redirect('/inspecteur_reg');
+            return redirect('/inspecteurs');
         }
         if ($guard == "gestionnaire_salle" && Auth::guard($guard)->check()) {
-            return redirect('/gestionnaire');
+            return redirect('/gestionnaires');
         }
         if ($guard == "parent_tuteur" && Auth::guard($guard)->check()) {
-            return redirect('/parent_tut');
+            return redirect('/parent_tuts');
         }
         if (Auth::guard($guard)->check()) {
             return redirect('/home');

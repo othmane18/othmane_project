@@ -18,6 +18,7 @@ class CreateDirecteurProvsTable extends Migration
             $table->string('nom_dr_prov');
             $table->string('email_dr_prov')->unique();
             $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
             $table->boolean('is_super')->default(false);
             $table->rememberToken();
             $table->timestamps();

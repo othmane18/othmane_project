@@ -18,6 +18,7 @@ class CreateInspecteurRegsTable extends Migration
             $table->string('nom_inspect');
             $table->string('email_inspect')->unique();
             $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
             $table->boolean('is_inspect')->default(false);
             $table->rememberToken();
             $table->timestamps();

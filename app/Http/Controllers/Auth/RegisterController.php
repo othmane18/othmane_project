@@ -12,10 +12,12 @@ use App\Models\Etudiant;
 use App\Models\GestSalle;
 use App\Models\InspecteurReg;
 use App\Models\ParentTuteur;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -46,12 +48,14 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        // dd('ici là comme ça');
         $this->middleware('guest');
         $this->middleware('guest:admin');
         $this->middleware('guest:enseignant');
         $this->middleware('guest:etudiant');
         $this->middleware('guest:directeur_reg');
         $this->middleware('guest:directeur_prov');
+        $this->middleware('guest:inspecteur_reg');
         $this->middleware('guest:gestionnaire_salle');
         $this->middleware('guest:parent_tuteur');
     }
@@ -103,12 +107,22 @@ class RegisterController extends Controller
     {
         // dd($request->all());
         $this->adminValidator($request->all())->validate();
-        $admin = Admin::create([
-            'name_admin' => $request['name_admin'],
-            'email_admin' => $request['email_admin'],
-            'password' => Hash::make($request['password']),
-        ]);
-        return redirect()->intended('login/admin');
+        event(new Registered(
+            $admin = Admin::create([
+                'name_admin' => $request['name_admin'],
+                'email_admin' => $request['email_admin'],
+                'password' => Hash::make($request['password']),
+            ])
+        ));
+        $this->guardAdmin()->login($admin);
+        // event(new Registered($user = $this->create($request->all())));
+        // return redirect()->intended('login/admin');
+        return $this->registered($request, $admin) ?: redirect($this->redirectPath());
+    }
+
+    protected function guardAdmin()
+    {
+        return Auth::guard('admin');
     }
 
 

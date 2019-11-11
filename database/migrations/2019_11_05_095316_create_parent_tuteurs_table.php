@@ -7,7 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 class CreateParentTuteursTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. 
      *
      * @return void
      */
@@ -18,6 +18,7 @@ class CreateParentTuteursTable extends Migration
             $table->string('nom_parent');
             $table->string('email_parent')->unique();
             $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
             $table->boolean('is_parent')->default(false);
             $table->rememberToken();
             $table->timestamps();

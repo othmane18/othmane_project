@@ -37,6 +37,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        // dd('ici');
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:admin')->except('logout');
         $this->middleware('guest:enseignant')->except('logout');
@@ -61,8 +62,8 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('admin')->attempt(['email_admin' => $request->email_admin, 'password' => $request->password], $request->get('remember'))) {
-
-            return redirect()->intended('/admin');
+            // dd('attendons ici!');
+            return redirect()->intended('/admins');
         }
         return back()->withInput($request->only('email_admin', 'remember'));
     }
@@ -81,7 +82,7 @@ class LoginController extends Controller
 
         if (Auth::guard('enseignant')->attempt(['email_enseignant' => $request->email_enseignant, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended('/enseignant');
+            return redirect()->intended('/enseignants');
         }
         return back()->withInput($request->only('email_enseignant', 'remember'));
     }
@@ -100,7 +101,7 @@ class LoginController extends Controller
 
         if (Auth::guard('etudiant')->attempt(['email_etudiant' => $request->email_etudiant, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended('/etudiant');
+            return redirect()->intended('/etudiants');
         }
         return back()->withInput($request->only('email_etudiant', 'remember'));
     }
@@ -119,7 +120,7 @@ class LoginController extends Controller
 
         if (Auth::guard('directeur_reg')->attempt(['email_dreg' => $request->email_dreg, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended('/directeur_reg');
+            return redirect()->intended('/directeur_regs');
         }
         return back()->withInput($request->only('email_dreg', 'remember'));
     }
@@ -138,7 +139,7 @@ class LoginController extends Controller
 
         if (Auth::guard('directeur_prov')->attempt(['email_dr_prov' => $request->email_dr_prov, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended('/directeur_prov');
+            return redirect()->intended('/directeur_provs');
         }
         return back()->withInput($request->only('email_dr_prov', 'remember'));
     }
@@ -157,7 +158,7 @@ class LoginController extends Controller
 
         if (Auth::guard('inspecteur_reg')->attempt(['email_inspect' => $request->email_inspect, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended('/inspecteur_reg');
+            return redirect()->intended('/inspecteurs');
         }
         return back()->withInput($request->only('email_inspect', 'remember'));
     }
@@ -176,7 +177,7 @@ class LoginController extends Controller
 
         if (Auth::guard('gestionnaire_salle')->attempt(['email_gestionnaire' => $request->email_gestionnaire, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended('/gestionnnaire');
+            return redirect()->intended('/gestionnaires');
         }
         return back()->withInput($request->only('email_gestionnaire', 'remember'));
     }
@@ -195,7 +196,7 @@ class LoginController extends Controller
 
         if (Auth::guard('parent_tuteur')->attempt(['email_parent' => $request->email_parent, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended('/parent_tut');
+            return redirect()->intended('/parent_tuts');
         }
         return back()->withInput($request->only('email_parent', 'remember'));
     }

@@ -18,6 +18,7 @@ class CreateDirecteurRegsTable extends Migration
             $table->string('nom_dreg');
             $table->string('email_dreg')->unique();
             $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
             $table->boolean('is_dreg')->default(false);
             $table->rememberToken();
             $table->timestamps();

@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
@@ -62,12 +62,20 @@ Route::post('/register/parent_tut', 'Auth\RegisterController@createParent');
 
 
 
-Route::view('/home', 'home')->middleware('auth');
-Route::view('/admin', 'admin');
-Route::view('/enseignant', 'enseignant');
-Route::view('/etudiant', 'etudiant');
-Route::view('/directeur_reg', 'directeur_reg');
-Route::view('/directeur_prov', 'directeur_prov');
-Route::view('/inspecteur_reg', 'inspecteur_reg');
-Route::view('/gestionnnaire', 'gestionnnaire');
-Route::view('/parent_tut', 'parent_tut');
+Route::view('/home', 'home')->middleware(['verified', 'auth']);
+// Route::view('/admin', 'admin');
+Route::resource('admins', 'AdminsController');
+// Route::view('/enseignant', 'enseignant');
+Route::resource('enseignants', 'EnseignantController');
+// Route::view('/etudiant', 'etudiant');
+Route::resource('etudiants', 'EtudiantsController');
+// Route::view('/directeur_reg', 'directeur_reg');
+Route::resource('directeur_regs', 'DrRegsController');
+// Route::view('/directeur_prov', 'directeur_prov');
+Route::resource('directeur_provs', 'DrProvsController');
+// Route::view('/inspecteur_reg', 'inspecteur_reg');
+Route::resource('inspecteurs', 'InspecteursController');
+// Route::view('/gestionnnaire', 'gestionnnaire');
+Route::resource('gestionnaires', 'GestionnairesController');
+// Route::view('/parent_tut', 'parent_tut');
+Route::resource('parent_tuts', 'ParenttsController');

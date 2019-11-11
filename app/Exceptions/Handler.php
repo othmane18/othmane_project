@@ -57,31 +57,30 @@ class Handler extends ExceptionHandler
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
-        if ($request->is('admin') || $request->is('admin/*')) {
+        if ($request->is('admins') || $request->is('admins/*')) {
             return redirect()->guest('/login/admin');
         }
-        if ($request->is('enseignant') || $request->is('enseignant/*')) {
+        if ($request->is('enseignants') || $request->is('enseignants/*')) {
             return redirect()->guest('/login/enseignant');
         }
-        if ($request->is('etudiant') || $request->is('etudiant/*')) {
+        if ($request->is('etudiants') || $request->is('etudiants/*')) {
             return redirect()->guest('/login/etudiant');
         }
-        if ($request->is('directeur_reg') || $request->is('directeur_reg/*')) {
+        if ($request->is('directeur_regs') || $request->is('directeur_regs/*')) {
             return redirect()->guest('login/directeur_reg');
         }
-        if ($request->is('directeur_prov') || $request->is('directeur_prov /*')) {
+        if ($request->is('directeur_provs') || $request->is('directeur_provs /*')) {
             return redirect()->guest('/login/directeur_prov');
         }
-        if ($request->is('inspecteur') || $request->is('directeur /*')) {
+        if ($request->is('inspecteurs') || $request->is('directeurs /*')) {
             return redirect()->guest('/login/inspecteur');
         }
-        if ($request->is('gestionnaire') || $request->is('gestionnaire /*')) {
+        if ($request->is('gestionnaires') || $request->is('gestionnaires /*')) {
             return redirect()->guest('/login/gestionnaire');
         }
-        if ($request->is('parent_tut') || $request->is('parent_tut /*')) {
+        if ($request->is('parent_tuts') || $request->is('parent_tuts /*')) {
             return redirect()->guest('/login/parent_tut');
         }
-
 
         return redirect()->guest(route('login'));
     }

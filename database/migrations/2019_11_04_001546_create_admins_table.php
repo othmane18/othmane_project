@@ -18,6 +18,7 @@ class CreateAdminsTable extends Migration
             $table->string('name_admin');
             $table->string('email_admin')->unique();
             $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
             $table->boolean('is_super')->default(false);
             $table->rememberToken();
             $table->timestamps();

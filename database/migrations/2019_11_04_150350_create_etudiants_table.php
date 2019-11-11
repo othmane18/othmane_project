@@ -18,6 +18,7 @@ class CreateEtudiantsTable extends Migration
             $table->string('nom_etudiant');
             $table->string('email_etudiant')->unique();
             $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
             $table->boolean('is_etudiant')->default(false);
             $table->rememberToken();
             $table->timestamps();
